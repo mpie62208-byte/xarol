@@ -157,6 +157,33 @@ function publish(){
   generateCalendar();
   renderPosts(selectedDate);
 }
+function sendToDiscord(){
+  const message = document.getElementById("discordMessage").value;
+
+  if(!message){
+    alert("Escreve uma mensagem 😅");
+    return;
+  }
+
+  const webhookURL = "https://discord.com/api/webhooks/1475689358139854890/UIIQVsjn3EZxt9xu5v0Tpw-JKhXsb5cM_UauJaW8diAkX43ELeYgM7-pAbjR2k3Ic_e5";
+
+  fetch(webhookURL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      content: message
+    })
+  })
+  .then(() => {
+    alert("Mensagem enviada para o amor da sua vida <3 ");
+    document.getElementById("discordMessage").value = "";
+  })
+  .catch(() => {
+    alert("Erro ao enviar 😢");
+  });
+}
 
 updateTimer();
 populateSelectors();
